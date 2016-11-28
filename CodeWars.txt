@@ -1,0 +1,1474 @@
+﻿8 kyu
+Welcome to the City
+Ruby:
+
+def say_hello(name, city, state)
+  "Hello, #{"#{name.join(" ")}"}! Welcome to #{city}, #{state}!"
+end
+5 minutes agoRefactorDiscuss
+7 kyu
+Unpacking Arguments
+Ruby:
+
+def spread(func, args)
+  func.call(*args)
+end
+55 minutes agoRefactorDiscuss
+7 kyu
+80's Kids #2: Help ALF Find His Spaceship
+Ruby:
+
+def find_spaceship(map)
+  map.split("\n").reverse.each_with_index do |line,index|
+    return [line.chars.find_index("X"),index]if line.include?("X")
+  end
+  "Spaceship lost forever."
+end
+1 hour agoRefactorDiscuss
+6 kyu
+Persistent Bugger.
+Ruby:
+
+def persistence(n)
+    return 0 if n.to_s.length == 1
+    product = n.to_s.chars.map(&:to_i).reduce(:*)
+    1 + persistence(product)   # your code
+end
+1 hour agoRefactorDiscuss
+6 kyu
+The Book of Mormon
+Ruby:
+
+def mormons(start, reach, target,num = 0)
+  return num if start >= target
+  start = start * reach + start
+  num += 1
+  mormons(start,reach,target,num)
+end
+1 hour agoRefactorDiscuss
+8 kyu
+Enumerable Magic #12 - Find Minimum Value by Comparison
+Ruby:
+
+def min list, &block
+  list.sort(&block).first
+end
+2 hours agoRefactorDiscuss
+8 kyu
+Enumerable Magic #6 - Count Items
+Ruby:
+
+def count list, &block
+ list.select(&block).count
+end
+2 hours agoRefactorDiscuss
+7 kyu
+Colour Association
+Ruby:
+
+def colour_association(arr)
+  arr.map do |array|
+    {array[0]=>array[1]}        
+  end
+end
+2 hours agoRefactorDiscuss
+8 kyu
+Welcome!
+Ruby:
+
+def greet(language)
+  hash = {'english'=>'Welcome',
+ 'czech'=>'Vitejte',
+ 'danish'=>'Velkomst',
+ 'dutch'=>'Welkom', 
+ 'estonian'=>'Tere tulemast',
+ 'finnish'=>'Tervetuloa',
+ 'flemish'=>'Welgekomen',
+ 'french'=>'Bienvenue',
+ 'german'=>'Willkommen',
+ 'irish'=>'Failte',
+ 'italian'=>'Benvenuto',
+ 'latvian'=>'Gaidits',
+ 'lithuanian'=>'Laukiamas',
+ 'polish'=>'Witamy',
+ 'spanish'=>'Bienvenido',
+ 'swedish'=>'Valkommen',
+ 'welsh'=>'Croeso'}
+ hash[language] ||= "Welcome"
+end
+2 hours agoRefactorDiscuss
+BetaConvert Symbol to Array
+Ruby:
+
+class Symbol
+  def to_ary
+    [self]
+  end
+end
+2 hours agoRefactorDiscuss
+#TODO; monkey programming
+class Symbol
+  def to_ary
+    [self]
+  end
+end
+2 hours agoRefactor
+7 kyu
+Line Type Parser
+Ruby:
+
+def line_types lines
+  lines.map! do |line|
+    if line == nil
+      line = :unknown
+    elsif line.downcase.include?("alpha")
+      line = :alpha
+    elsif line.downcase.include?("beta")
+      line = :beta
+    else
+      line = :unknown
+    end
+  end
+  lines
+end
+2 hours agoRefactorDiscuss
+8 kyu
+Jenny's secret message
+Ruby:
+
+def greet(name)
+  return "Hello, my love!" if name == "Johnny"
+  return "Hello, #{name}!"
+end
+3 hours agoRefactorDiscuss
+8 kyu
+Counting sheep...
+Ruby:
+
+def countSheeps array
+  array.select{|item| item == true}.length
+end
+3 hours agoRefactorDiscuss
+8 kyu
+Sum of positive
+Ruby:
+
+def positive_sum(arr)
+  0 if arr.size == 0
+  sum = 0
+  arr.each do |element|
+    sum += element if element > 0 
+  end
+  sum
+end
+7 hours agoRefactorDiscuss
+8 kyu
+Do I get a bonus?
+Ruby:
+
+def bonus_time(salary, bonus)
+  salary = salary * 10 if bonus 
+  "$#{salary}"
+end
+7 hours agoRefactorDiscuss
+8 kyu
+Convert boolean values to strings 'Yes' or 'No'.
+Ruby:
+
+def bool_to_word bool
+  return "Yes" if bool 
+  "no"
+end
+7 hours agoRefactorDiscuss
+8 kyu
+String repeat
+Ruby:
+
+def repeat_str (n, s)
+  s * n
+end
+7 hours agoRefactorDiscuss
+7 kyu
+Substituting Variables Into Strings: Padded Numbers
+Ruby:
+
+def solution(value)
+  "Value is #{sprintf('%05d',value)}"
+end
+7 hours agoRefactorDiscuss
+8 kyu
+Basic variable assignment
+Ruby:
+
+a = "code"
+b = "wa.rs"
+name = a + b
+7 hours agoRefactorDiscuss
+8 kyu
+Grasshopper - Variable Assignment Debug
+Ruby:
+
+a = "dev"
+b = "Lab"
+
+name = a + b
+7 hours agoRefactorDiscuss
+6 kyu
+Statistics for an Athletic Association
+Ruby:
+
+def to_seconds(string)
+  string = string.split("|")
+  (((string[0].to_i*60)+string[1].to_i) * 60)+string[2].to_i
+end
+
+def two_digits(int)
+  string = int.to_s
+  case string.length
+  when 0 
+    string = "00"
+  when 1
+    string = "0"+string
+  end
+  return string
+end
+
+def to_race_format(int)
+  seconds = int % 60
+  int -= seconds
+  mins = int / 60
+  hours = mins /60
+  mins -= hours * 60
+  return "#{two_digits(hours)}|#{two_digits(mins)}|#{two_digits(seconds)}"
+end
+
+def stat(string)
+  return "" if string == ""
+  times = string.split.map!{|individual| to_seconds(individual)}
+  times.sort!
+  range = to_race_format(times[-1] - times[0])
+  sum = 0 
+  times.each{|a| sum += a}
+  average = to_race_format(sum / times.length)
+  if times.length.odd?
+    median = to_race_format(times[times.length / 2] )
+  else
+    if times.length > 1    
+      median = to_race_format((times[times.length / 2] + times [times.length / 2 - 1])/2)
+    else
+      median = to_race_format(times[0])
+    end
+  end
+  return "Range: #{range} Average: #{average} Median: #{median}"
+end
+1 day agoRefactorDiscuss
+BetaLinux history and `!` command. Series#5 The `!?string` command
+Ruby:
+
+def bang_contain_string(s,history)
+  history.split("\n").reverse.each do |line|
+    line.sub!(/ +\d{1,3} +/,"")
+    return line if line.include?(s)
+  end
+  "!#{s}: event not found"
+end
+2 days agoRefactorDiscuss
+7 kyu
+Jaden Casing Strings
+Ruby:
+
+class String
+  def toJadenCase
+    self.split.map!(&:capitalize).join(" ")
+  end
+end
+5 days agoRefactorDiscuss
+5 kyu
+Largest 5 digit number in a series
+Ruby:
+
+def solution(digits)
+  digits = digits.to_s
+  high = 0
+  for i in 0...digits.length
+    sum = (digits[i].to_s + digits[i+1].to_s + digits[i+2].to_s+ digits[i+3].to_s + digits[i+4].to_s).to_i
+    high = sum if  sum > high
+  end
+  high
+end
+5 days agoRefactorDiscuss
+7 kyu
+Highest and Lowest
+Ruby:
+
+def high_and_low(numbers)
+  array = numbers.split.map{|n|n.to_i}.sort
+  "#{array[-1]} #{array[0]}"
+end
+5 days agoRefactorDiscuss
+7 kyu
+Descending Order
+Ruby:
+
+def descending_order(n)
+  n.to_s.split("").sort.reverse.join.to_i
+end
+5 days agoRefactorDiscuss
+8 kyu
+Remove First and Last Character
+Ruby:
+
+def remove_char(s)
+  s[1...-1]
+end
+5 days agoRefactorDiscuss
+6 kyu
+Who likes it?
+Ruby:
+
+def likes(names)
+  return "no one likes this" if names.length == 0
+  return "#{names[0]} likes this" if names.length == 1
+  return "#{names[0]} and #{names[1]} like this" if names.length == 2
+  return "#{names[0]}, #{names[1]} and #{names[2]} like this" if names.length == 3
+  return "#{names[0]}, #{names[1]} and #{(names.length) - 2} others like this" if names.length > 3
+end
+1 week agoRefactorDiscuss
+6 kyu
+Regexp Basics - is it IPv4 address?
+Ruby:
+
+class String
+  def ipv4_address?
+    return false unless (/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/ =~ self)
+    return false unless self.gsub(/\d/, "").length == 3
+    self.split(".").each do |num|
+      return false if num.length > 1 && num[0] == "0"
+      return false if num.to_i > 255
+    end
+    true
+  end
+end
+1 week agoRefactorDiscuss
+4 kyu
+Valid Braces
+Ruby:
+
+def validBraces(braces)
+  opening = ["{","(","["]
+  closing = ["}",")","]"]
+  open = []
+
+  braces.chars.map do |char|
+    open << char if opening.include? char
+    if closing.include? char 
+      if opening[closing.index(char)] == open[-1]
+        open.pop
+      else
+        return false
+      end
+    end
+  end
+  open.empty?
+end
+1 week agoRefactorDiscuss
+def validBraces(braces)
+  opening = ["{","(","["]
+  closing = ["}",")","]"]
+  open = []
+
+  braces.chars.map do |char|
+    open << char if opening.include? char
+    if closing.include? char 
+      if opening[closing.index(char)] == open[-1]
+        open.pop
+      else
+        return false
+      end
+    end
+  end
+  open.empty? ? true : false
+end
+1 week agoRefactorDiscuss
+8 kyu
+Convert boolean values to strings 'Yes' or 'No'.
+Ruby:
+
+def bool_to_word bool
+  return "Yes" if bool 
+  "no"
+end
+7 hours agoRefactorDiscuss
+8 kyu
+String repeat
+Ruby:
+
+def repeat_str (n, s)
+  s * n
+end
+7 hours agoRefactorDiscuss
+7 kyu
+Substituting Variables Into Strings: Padded Numbers
+Ruby:
+
+def solution(value)
+  "Value is #{sprintf('%05d',value)}"
+end
+7 hours agoRefactorDiscuss
+8 kyu
+Basic variable assignment
+Ruby:
+
+a = "code"
+b = "wa.rs"
+name = a + b
+7 hours agoRefactorDiscuss
+8 kyu
+Grasshopper - Variable Assignment Debug
+Ruby:
+
+a = "dev"
+b = "Lab"
+
+name = a + b
+7 hours agoRefactorDiscuss
+6 kyu
+Statistics for an Athletic Association
+Ruby:
+
+def to_seconds(string)
+  string = string.split("|")
+  (((string[0].to_i*60)+string[1].to_i) * 60)+string[2].to_i
+end
+
+def two_digits(int)
+  string = int.to_s
+  case string.length
+  when 0 
+    string = "00"
+  when 1
+    string = "0"+string
+  end
+  return string
+end
+
+def to_race_format(int)
+  seconds = int % 60
+  int -= seconds
+  mins = int / 60
+  hours = mins /60
+  mins -= hours * 60
+  return "#{two_digits(hours)}|#{two_digits(mins)}|#{two_digits(seconds)}"
+end
+
+def stat(string)
+  return "" if string == ""
+  times = string.split.map!{|individual| to_seconds(individual)}
+  times.sort!
+  range = to_race_format(times[-1] - times[0])
+  sum = 0 
+  times.each{|a| sum += a}
+  average = to_race_format(sum / times.length)
+  if times.length.odd?
+    median = to_race_format(times[times.length / 2] )
+  else
+    if times.length > 1    
+      median = to_race_format((times[times.length / 2] + times [times.length / 2 - 1])/2)
+    else
+      median = to_race_format(times[0])
+    end
+  end
+  return "Range: #{range} Average: #{average} Median: #{median}"
+end
+1 day agoRefactorDiscuss
+BetaLinux history and `!` command. Series#5 The `!?string` command
+Ruby:
+
+def bang_contain_string(s,history)
+  history.split("\n").reverse.each do |line|
+    line.sub!(/ +\d{1,3} +/,"")
+    return line if line.include?(s)
+  end
+  "!#{s}: event not found"
+end
+2 days agoRefactorDiscuss
+7 kyu
+Jaden Casing Strings
+Ruby:
+
+class String
+  def toJadenCase
+    self.split.map!(&:capitalize).join(" ")
+  end
+end
+5 days agoRefactorDiscuss
+5 kyu
+Largest 5 digit number in a series
+Ruby:
+
+def solution(digits)
+  digits = digits.to_s
+  high = 0
+  for i in 0...digits.length
+    sum = (digits[i].to_s + digits[i+1].to_s + digits[i+2].to_s+ digits[i+3].to_s + digits[i+4].to_s).to_i
+    high = sum if  sum > high
+  end
+  high
+end
+5 days agoRefactorDiscuss
+7 kyu
+Highest and Lowest
+Ruby:
+
+def high_and_low(numbers)
+  array = numbers.split.map{|n|n.to_i}.sort
+  "#{array[-1]} #{array[0]}"
+end
+5 days agoRefactorDiscuss
+7 kyu
+Descending Order
+Ruby:
+
+def descending_order(n)
+  n.to_s.split("").sort.reverse.join.to_i
+end
+5 days agoRefactorDiscuss
+8 kyu
+Remove First and Last Character
+Ruby:
+
+def remove_char(s)
+  s[1...-1]
+end
+5 days agoRefactorDiscuss
+6 kyu
+Who likes it?
+Ruby:
+
+def likes(names)
+  return "no one likes this" if names.length == 0
+  return "#{names[0]} likes this" if names.length == 1
+  return "#{names[0]} and #{names[1]} like this" if names.length == 2
+  return "#{names[0]}, #{names[1]} and #{names[2]} like this" if names.length == 3
+  return "#{names[0]}, #{names[1]} and #{(names.length) - 2} others like this" if names.length > 3
+end
+1 week agoRefactorDiscuss
+6 kyu
+Regexp Basics - is it IPv4 address?
+Ruby:
+
+class String
+  def ipv4_address?
+    return false unless (/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/ =~ self)
+    return false unless self.gsub(/\d/, "").length == 3
+    self.split(".").each do |num|
+      return false if num.length > 1 && num[0] == "0"
+      return false if num.to_i > 255
+    end
+    true
+  end
+end
+1 week agoRefactorDiscuss
+4 kyu
+Valid Braces
+Ruby:
+
+def validBraces(braces)
+  opening = ["{","(","["]
+  closing = ["}",")","]"]
+  open = []
+
+  braces.chars.map do |char|
+    open << char if opening.include? char
+    if closing.include? char 
+      if opening[closing.index(char)] == open[-1]
+        open.pop
+      else
+        return false
+      end
+    end
+  end
+  open.empty?
+end
+1 week agoRefactorDiscuss
+def validBraces(braces)
+  opening = ["{","(","["]
+  closing = ["}",")","]"]
+  open = []
+
+  braces.chars.map do |char|
+    open << char if opening.include? char
+    if closing.include? char 
+      if opening[closing.index(char)] == open[-1]
+        open.pop
+      else
+        return false
+      end
+    end
+  end
+  open.empty? ? true : false
+end
+1 week agoRefactorDiscuss
+5 kyu
+Tongues
+Ruby:
+
+def tongues(code)
+  def conversion(letter,array,ammount)    
+    index = array.index(letter)
+    next_index = index + ammount
+    next_index -= array.length if next_index >= array.length
+    array[next_index]
+  end
+
+  vowels = ['a', 'i', 'y', 'e', 'o', 'u']
+  consonants  = ['b', 'k', 'x', 'z', 'n', 'h', 'd', 'c', 'w', 'g', 'p', 'v', 'j', 'q', 't', 's', 'r', 'l', 'm', 'f']
+
+  code = code.chars.map do |letter|
+    caps = letter.upcase == letter ? true : false
+    if vowels.include?(letter.downcase)
+      letter = conversion(letter.downcase,vowels,3)  
+    elsif consonants.include?(letter.downcase)
+      letter = conversion(letter.downcase,consonants,10) 
+    end
+    caps ? letter.upcase : letter
+  end
+  code.join
+end
+
+
+1 week agoRefactorDiscuss
+def tongues(code)
+  vowels = ['a', 'i', 'y', 'e', 'o', 'u']
+  consonants  = ['b', 'k', 'x', 'z', 'n', 'h', 'd', 'c', 'w', 'g', 'p', 'v', 'j', 'q', 't', 's', 'r', 'l', 'm', 'f']
+
+  code = code.chars.map do |letter|
+    caps = letter.upcase == letter ? true : false
+    if vowels.include?(letter.downcase)
+      letter = conversion(letter.downcase,vowels,3)  
+    elsif consonants.include?(letter.downcase)
+      letter = conversion(letter.downcase,consonants,10) 
+    end
+    caps ? letter.upcase : letter
+  end
+  code.join
+end
+
+
+def conversion(letter,array,ammount)    
+  index = array.index(letter)
+  next_index = index + ammount
+  next_index -= array.length if next_index >= array.length
+  array[next_index]
+end
+1 week agoRefactorDiscuss
+6 kyu
+longest_palindrome
+Ruby:
+
+def longest_palindrome s
+  longest = 0
+  for seeking_length in 1..s.length
+    for substring_id in 0..s.length
+      substring = s[substring_id..seeking_length]
+      longest = substring.length if substring.is_palindrome? && substring.length > longest
+    end
+  end
+  return longest
+end
+
+class String
+  def is_palindrome?
+    self == self.reverse ? true : false
+  end
+end
+1 week agoRefactorDiscuss
+6 kyu
+The Enigma Machine - Part 1: The Plugboard
+Ruby:
+
+class Plugboard
+   def initialize(wires = "")      
+    raise "odd number of connections" if wires.length.odd?
+    raise "too many wires" if wires.length > 20
+    raise "wires not unique" if wires.chars.uniq.length != wires.length
+
+    @swaps = {}
+    while wires.length > 0 
+      @swaps[wires[0]] = wires[1]
+      @swaps[wires[1]] = wires[0]
+      wires = wires[2..wires.length]
+    end  
+  
+  end
+  def process(wire)
+    return @swaps[wire] if @swaps[wire] != nil
+    return wire
+  end
+end
+1 week agoRefactorDiscuss
+class Plugboard
+   def initialize(wires = "")      
+    raise "odd number of connections" if (wires.length % 2) != 0
+    @swaps = {}
+    return true if wires.length == 0
+    while wires.length > 0 
+      raise "wire already exists on this char" if @swaps[wires[1]] != nil 
+      @swaps[wires[0]] = wires[1]
+      @swaps[wires[1]] = wires[0]
+      wires = wires[2..wires.length]
+    end  
+    raise "too many wires" if @swaps.length > 20
+    return true
+  end
+  def process(wire)
+    return @swaps[wire] if @swaps[wire] != nil
+    return wire
+  end
+end
+1 week agoRefactorDiscuss
+8 kyu
+Is the string uppercase?
+Ruby:
+
+class String
+  def is_upcase?
+    return true if self.upcase == self
+    return false
+  end
+end
+2 weeks agoRefactorDiscuss
+6 kyu
+Lambdas as a mechanism for Open/Closed
+Python:
+
+spoken    = lambda greeting: greeting + "." # ?
+shouted   = lambda greeting: greeting.upper() + "!"#?
+whispered = lambda greeting: greeting.lower() + "."
+
+greet = lambda style, msg:  style(msg)
+2 months agoRefactorDiscuss
+5 kyu
+Directions Reduction
+Ruby:
+
+def dirReduc(arr)
+    arr.each_with_index do |direction,index|
+    break if index==arr.length - 1
+    next_directions = [direction,arr[index+1]].sort
+    if next_directions == ["NORTH","SOUTH"]||next_directions == ["EAST","WEST"]
+      arr.delete_at(index + 1)
+      arr.delete_at(index)
+      dirReduc(arr)        
+      return arr
+    end
+  end
+  return arr
+end
+2 weeks agoRefactorDiscuss
+6 kyu
+Bit Counting
+Ruby:
+
+def count_bits(n)
+  n.to_s(2).split("").map{|x|x.to_i}.inject(0,:+)
+end
+2 weeks agoRefactorDiscuss
+5 kyu
+The Hashtag Generator
+Ruby:
+
+def generateHashtag(str)
+   return false if str == ""
+   str = "#" + str.split.each{|x| x.capitalize!}.join
+   return str.length >= 140 ?  false : str
+end
+2 weeks agoRefactorDiscuss
+6 kyu
+Good vs Evil
+Ruby:
+
+def tally(numbers,worth)
+  score = 0
+  for i in 0..(numbers.length)
+    score += numbers[i].to_i * worth[i].to_i
+  end
+  score
+end
+
+def goodVsEvil(good, evil)
+
+  good_worth = [1,2,3,3,4,10]
+  evil_worth = [1,2,2,2,3,5,10]
+
+  good_points = tally(good.split,good_worth)
+  evil_points = tally(evil.split,evil_worth) 
+
+  case good_points <=> evil_points
+  when 0  then "Battle Result: No victor on this battle field"
+  when -1 then "Battle Result: Evil eradicates all trace of Good"
+  when 1  then "Battle Result: Good triumphs over Evil"
+  end
+end
+2 weeks agoRefactorDiscuss
+def tally(numbers,worth)
+  score = 0
+  for i in 0..(numbers.length)
+    score += numbers[i].to_i * worth[i].to_i
+  end
+  score
+end
+
+def goodVsEvil(good, evil)
+
+  good_worth = [1,2,3,3,4,10]
+  evil_worth = [1,2,2,2,3,5,10]
+
+  good_points = tally(good.split,good_worth)
+  evil_points = tally(evil.split,evil_worth) 
+
+  case good_points <=> evil_points
+  when 0  then return "Battle Result: No victor on this battle field"
+  when -1 then return "Battle Result: Evil eradicates all trace of Good"
+  when 1  then return "Battle Result: Good triumphs over Evil"
+  end
+end
+2 weeks agoRefactorDiscuss
+def goodVsEvil(good, evil)
+  def tally(numbers,worth)
+    score = 0
+    for i in 0..(numbers.length)
+      score += numbers[i].to_i * worth[i].to_i
+    end
+    score
+  end
+
+  good_worth = [1,2,3,3,4,10]
+  evil_worth = [1,2,2,2,3,5,10]
+
+  good_points = tally(good.split,good_worth)
+  evil_points = tally(evil.split,evil_worth) 
+
+  case good_points <=> evil_points
+  when 0 ; return "Battle Result: No victor on this battle field"
+  when -1; return "Battle Result: Evil eradicates all trace of Good"
+  when 1 ; return "Battle Result: Good triumphs over Evil"
+  end
+end
+2 weeks agoRefactorDiscuss
+5 kyu
+Greed is Good
+Ruby:
+
+def score( dice )
+
+  score_map = [1000,200,300,400,500,600]
+  score = 0
+
+  for i in 1..6   #check for threes
+    case dice.select{|x| x == i}.length
+    when 3 
+      score += score_map[i-1]
+      dice.delete(i)
+    when 4
+      score += score_map[i-1]
+      dice.delete(i)
+      dice << i
+    when 5
+      score += score_map[i-1]
+      dice.delete(i)
+      dice << i << i
+    end
+  end
+  #
+  
+  dice.each do |d|
+    if    d == 1 
+      score += 100
+    elsif d == 5 
+      score += 50
+    end
+  end  
+
+  score
+end
+2 weeks agoRefactorDiscuss
+6 kyu
+Unique In Order
+Ruby:
+
+def unique_in_order(x)
+ x = x.chars if x.is_a? String
+ current = nil
+ x = x.map do |char|
+  if char == current
+   char = nil
+  else
+   current = char
+  end
+ end
+ x.compact
+end
+2 weeks agoRefactorDiscuss
+6 kyu
+Multi-tap Keypad Text Entry on an Old Mobile Phone
+Ruby:
+
+def presses(phrase)
+	#button layout
+    buttons=[["1"]            ,"ABC2".split(""),"DEF3" .split(""),
+             "GHI4" .split(""),"JKL5".split(""),"MNO6" .split(""),
+             "PQRS7".split(""),"TUV8".split(""),"WXYZ9".split(""),
+             ["*"]            ,[" ","0"]       ,["#"]             ]
+
+    # generate hash of pushes for each button
+    button_map = Hash.new
+    (("A".."Z").to_a + ("0".."9").to_a << " "  ).each do |letter|
+		buttons.each do |button|
+			button.each_with_index {|char,press| button_map[letter] = press + 1  if char == letter}
+		end
+	end
+	
+  #does the actual counting	
+	count = 0
+	phrase.upcase.chars.each{|char| count += button_map[char]}
+	count
+end
+2 weeks agoRefactorDiscuss
+6 kyu
+Array.diff
+Ruby:
+
+def array_diff(a, b)
+  b.each{|b| a.delete(b)}
+  return a
+end
+2 weeks agoRefactorDiscuss
+8 kyu
+Double Char
+Ruby:
+
+def double_char(str)
+  str.chars.collect{|my_char| my_char * 2}.join("")
+end
+2 weeks agoRefactorDiscuss
+def double_char(str)
+  str = str.split("")
+  str = str.collect do |my_char| 
+    my_char = [my_char, my_char]
+  end
+  return str.join("")
+end
+2 weeks agoRefactorDiscuss
+6 kyu
+IQ Test
+Ruby:
+
+def iq_test(numbers)
+  odds, evens = 0, 0
+  numbers = numbers.split(" ")
+
+  #find if odds or evens are majority
+  numbers.each do |number| 
+    if number.to_i.even? 
+      evens += 1 
+    else
+      odds += 1
+    end
+  end
+
+  if evens == 1
+    numbers.each_with_index do |number,index| # more evens
+      return (index + 1) if number.to_i.even?
+    end
+  elsif odds == 1
+    numbers.each_with_index do |number,index| # more evens
+      return (index + 1) if !number.to_i.even?
+    end
+  else
+    return "error #{numbers}"
+  end
+
+end
+2 weeks agoRefactorDiscuss
+7 kyu
+Two to One
+Ruby:
+
+def longest(a1, a2)
+  return (a1.split("") + a2.split("")).sort.uniq.join
+end
+2 weeks agoRefactorDiscuss
+6 kyu
+Dubstep
+Python:
+
+def song_decoder(song):
+    song = song.replace("WUB"," ")
+    song = song.strip()
+    while "  " in song:song  = song.replace("  "," ")
+    return song
+2 months agoRefactor
+import string
+def song_decoder(song):
+    song  = song.replace("WUB"," ")
+    for x in range(0,5):
+        song  = song.replace("  "," ")
+    song = song.strip()
+    return song
+2 months agoRefactorDiscuss
+6 kyu
+Adding Binary Numbers
+Python:
+
+from operator import xor
+
+def add(a,b):
+    result = ""
+    carry = False
+    if len(a) < len(b): a , b = b , a  # make a longest
+    for x in range(0,len(a)-len(b)): b = "0" + b # make b match
+    for i,letter in enumerate(a[::-1]):
+        A = bool(letter)
+        B = bool(b[len(b) -1- i])
+        if carry == True:
+            if A and B:
+                result = "1" + result #print 1
+                carry = True
+            elif A ^ B:
+                result = "0" + result
+                carry = True
+            else:
+                result = "1" + result
+                carry = False          
+        else:
+            if A and B:
+                result = "0" + result #print 1
+                carry = True
+            elif A ^ B:
+                result = "1" + result
+                carry = False
+            else:
+                result = "0" + result
+                carry = False            
+    if carry == True: result = "1" + result 
+    result = result.lstrip("0")
+    if result == "": result = "0"
+    return result
+def bool(a):
+    if a == "0": return False
+    return True
+2 months agoRefactorDiscuss
+6 kyu
+Reverse words
+Python:
+
+def reverse_words(string):
+    result = []
+    string = string.split(" ")
+    for word in string:result.append(word[::-1])
+    return " ".join(result)
+2 months agoRefactorDiscuss
+8 kyu
+Multiply
+Python:
+
+def multiply(a, b):
+  return (a * b)
+2 months agoRefactor
+def multiply(a, b):
+  return a * b
+3 months agoRefactor
+5 kyu
+Scramblies
+Python:
+
+def scramble(s1,s2):    
+    alphabet = sorted("abcdefghifklmnopqrstuvwxyz")
+    for letter in alphabet:
+        if not s1.count(letter) >= s2.count(letter): return False
+    return True
+2 months agoRefactorDiscuss
+5 kyu
+Pascal's Triangle #2
+Python:
+
+def pascal(p):
+    result = []
+    for layer in range(0,p):
+        layerResult=[]
+        for number in range(0,layer+1):
+            if number == 0 or number == layer: layerResult.append(1) ## do edges
+            else: layerResult.append(result[layer-1][number-1]+result[layer-1][number])
+        result.append(layerResult)
+    return result
+2 months agoRefactorDiscuss
+5 kyu
+Did I Finish my Sudoku?
+Python:
+
+def done_or_not(board): 
+    for set in board:    # rows
+        if not checkSet(set): return 'Try again!'
+    for i in range(0,9): # coloumns
+        set = []
+        for j in range(0,9):
+           set.append(board[j][i])
+        if not checkSet(set): return 'Try again!'
+    for x in range(0,3): # regions
+        for y in range(0,3):
+            set = []
+            for i in range (0,3):
+                for j in range (0,3):
+                    set.append(board[(x*3) + i][(y*3) + j])
+            if not checkSet(set):return 'Try again!'
+    return 'Finished!'
+               
+def checkSet(list):
+    for value in range(1,9):
+        if list.count(value) != 1: return False
+    return True
+2 months agoRefactorDiscuss
+6 kyu
+Tortoise racing
+Python:
+
+def race(v1, v2, g):
+    delta = v2 - v1
+    if delta <= 0:return None    
+    time = g / delta 
+    h =  int(time)
+    m =  int(time * 60 - h * 60)
+    s =  int(time * 3600 - h * 3600 - m * 60)
+    return ([h,m,s])
+2 months agoRefactorDiscuss
+5 kyu
+Palindrome chain length
+Python:
+
+def palindrome_chain_length(n):
+    result = 0 
+    while(True):
+        reverse = str(n)[::-1]
+        if reverse == str (n): return result
+        else: 
+            result += 1
+            n += int(reverse)
+2 months agoRefactorDiscuss
+6 kyu
+Take a Number And Sum Its Digits Raised To The Consecutive Powers And ....¡Eureka!!
+Python:
+
+def sum_dig_pow(a, b): # range(a, b + 1) will be studied by the function
+    result = []
+    for x in range(a,b+1):
+        Sum = 0
+        for i, char in enumerate(str(x)): 
+            Sum += int(char) ** (i + 1)
+        if Sum == x: result.append(Sum)          
+    return result
+2 months agoRefactorDiscuss
+6 kyu
+Delete occurrences of an element if it occurs more than n times
+Python:
+
+def delete_nth(order,max_e):
+    result = []
+    for number in order:    
+        if result.count(number) != max_e:
+            result.append(number)
+    return result
+        
+2 months agoRefactorDiscuss
+7 kyu
+Exes and Ohs
+Python:
+
+def xo(s):
+    X = 0
+    O = 0
+    for ch in s:
+        if ch == "x" or ch == "X":
+            X += 1        
+        if ch == "o" or ch == "O":
+            O += 1
+    if X == O:
+        return True
+    return False
+2 months agoRefactorDiscuss
+7 kyu
+Get the Middle Character
+Python:
+
+def get_middle(s):
+    l = len(s)
+    if l%2 == 0: # 
+       return s[l/2 - 1:l/2 + 1] 
+    else:
+       return s[l/2]
+    
+3 months agoRefactorDiscuss
+7 kyu
+Complementary DNA
+Python:
+
+def DNA_strand(dna):
+    output = ""
+    for letter in dna:
+        if   letter == "A":
+            output += ("T")
+        elif letter == "T": 
+            output += ("A")
+        elif letter == "C":
+            output += ("G")
+        elif letter == "G":
+            output += ("C")
+    return output
+    # code here
+3 months agoRefactorDiscuss
+7 kyu
+Two to One
+Ruby:
+
+def longest(a1, a2)
+  return (a1.split("") + a2.split("")).sort.uniq.join
+end
+2 weeks agoRefactorDiscuss
+6 kyu
+Dubstep
+Python:
+
+def song_decoder(song):
+    song = song.replace("WUB"," ")
+    song = song.strip()
+    while "  " in song:song  = song.replace("  "," ")
+    return song
+2 months agoRefactor
+import string
+def song_decoder(song):
+    song  = song.replace("WUB"," ")
+    for x in range(0,5):
+        song  = song.replace("  "," ")
+    song = song.strip()
+    return song
+2 months agoRefactorDiscuss
+6 kyu
+Adding Binary Numbers
+Python:
+
+from operator import xor
+
+def add(a,b):
+    result = ""
+    carry = False
+    if len(a) < len(b): a , b = b , a  # make a longest
+    for x in range(0,len(a)-len(b)): b = "0" + b # make b match
+    for i,letter in enumerate(a[::-1]):
+        A = bool(letter)
+        B = bool(b[len(b) -1- i])
+        if carry == True:
+            if A and B:
+                result = "1" + result #print 1
+                carry = True
+            elif A ^ B:
+                result = "0" + result
+                carry = True
+            else:
+                result = "1" + result
+                carry = False          
+        else:
+            if A and B:
+                result = "0" + result #print 1
+                carry = True
+            elif A ^ B:
+                result = "1" + result
+                carry = False
+            else:
+                result = "0" + result
+                carry = False            
+    if carry == True: result = "1" + result 
+    result = result.lstrip("0")
+    if result == "": result = "0"
+    return result
+def bool(a):
+    if a == "0": return False
+    return True
+2 months agoRefactorDiscuss
+6 kyu
+Reverse words
+Python:
+
+def reverse_words(string):
+    result = []
+    string = string.split(" ")
+    for word in string:result.append(word[::-1])
+    return " ".join(result)
+2 months agoRefactorDiscuss
+8 kyu
+Multiply
+Python:
+
+def multiply(a, b):
+  return (a * b)
+2 months agoRefactor
+def multiply(a, b):
+  return a * b
+3 months agoRefactor
+5 kyu
+Scramblies
+Python:
+
+def scramble(s1,s2):    
+    alphabet = sorted("abcdefghifklmnopqrstuvwxyz")
+    for letter in alphabet:
+        if not s1.count(letter) >= s2.count(letter): return False
+    return True
+2 months agoRefactorDiscuss
+5 kyu
+Pascal's Triangle #2
+Python:
+
+def pascal(p):
+    result = []
+    for layer in range(0,p):
+        layerResult=[]
+        for number in range(0,layer+1):
+            if number == 0 or number == layer: layerResult.append(1) ## do edges
+            else: layerResult.append(result[layer-1][number-1]+result[layer-1][number])
+        result.append(layerResult)
+    return result
+2 months agoRefactorDiscuss
+5 kyu
+Did I Finish my Sudoku?
+Python:
+
+def done_or_not(board): 
+    for set in board:    # rows
+        if not checkSet(set): return 'Try again!'
+    for i in range(0,9): # coloumns
+        set = []
+        for j in range(0,9):
+           set.append(board[j][i])
+        if not checkSet(set): return 'Try again!'
+    for x in range(0,3): # regions
+        for y in range(0,3):
+            set = []
+            for i in range (0,3):
+                for j in range (0,3):
+                    set.append(board[(x*3) + i][(y*3) + j])
+            if not checkSet(set):return 'Try again!'
+    return 'Finished!'
+               
+def checkSet(list):
+    for value in range(1,9):
+        if list.count(value) != 1: return False
+    return True
+2 months agoRefactorDiscuss
+6 kyu
+Tortoise racing
+Python:
+
+def race(v1, v2, g):
+    delta = v2 - v1
+    if delta <= 0:return None    
+    time = g / delta 
+    h =  int(time)
+    m =  int(time * 60 - h * 60)
+    s =  int(time * 3600 - h * 3600 - m * 60)
+    return ([h,m,s])
+2 months agoRefactorDiscuss
+5 kyu
+Palindrome chain length
+Python:
+
+def palindrome_chain_length(n):
+    result = 0 
+    while(True):
+        reverse = str(n)[::-1]
+        if reverse == str (n): return result
+        else: 
+            result += 1
+            n += int(reverse)
+2 months agoRefactorDiscuss
+6 kyu
+Take a Number And Sum Its Digits Raised To The Consecutive Powers And ....¡Eureka!!
+Python:
+
+def sum_dig_pow(a, b): # range(a, b + 1) will be studied by the function
+    result = []
+    for x in range(a,b+1):
+        Sum = 0
+        for i, char in enumerate(str(x)): 
+            Sum += int(char) ** (i + 1)
+        if Sum == x: result.append(Sum)          
+    return result
+2 months agoRefactorDiscuss
+6 kyu
+Delete occurrences of an element if it occurs more than n times
+Python:
+
+def delete_nth(order,max_e):
+    result = []
+    for number in order:    
+        if result.count(number) != max_e:
+            result.append(number)
+    return result
+        
+2 months agoRefactorDiscuss
+7 kyu
+Exes and Ohs
+Python:
+
+def xo(s):
+    X = 0
+    O = 0
+    for ch in s:
+        if ch == "x" or ch == "X":
+            X += 1        
+        if ch == "o" or ch == "O":
+            O += 1
+    if X == O:
+        return True
+    return False
+2 months agoRefactorDiscuss
+7 kyu
+Get the Middle Character
+Python:
+
+def get_middle(s):
+    l = len(s)
+    if l%2 == 0: # 
+       return s[l/2 - 1:l/2 + 1] 
+    else:
+       return s[l/2]
+    
+3 months agoRefactorDiscuss
+7 kyu
+Complementary DNA
+Python:
+
+def DNA_strand(dna):
+    output = ""
+    for letter in dna:
+        if   letter == "A":
+            output += ("T")
+        elif letter == "T": 
+            output += ("A")
+        elif letter == "C":
+            output += ("G")
+        elif letter == "G":
+            output += ("C")
+    return output
+    # code here
+3 months agoRefactorDiscuss
+8 kyu
+Broken Greetings
+Python:
+
+class Person:
+  def __init__(self, name):
+    self.name = name
+  
+  def greet(self, other_name):
+    return "Hi {0}, my name is {1}".format(other_name, self.name)
+3 months agoRefactor
