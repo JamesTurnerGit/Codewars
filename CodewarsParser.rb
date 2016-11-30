@@ -3,8 +3,8 @@
 big_string = File.read("CodeWars.txt")
 home_directory = Dir.pwd
 
-temp = big_string.scan(/\d kyu/)
-challenges = big_string.split(/\d kyu/).map.with_index { |e, i| e = temp[i-1].to_s + e.to_s}
+temp = big_string.scan(/^\d kyu$/)
+challenges = big_string.split(/^\d kyu$/).map.with_index { |e, i| e = temp[i-1].to_s + e.to_s}
 challenges = challenges[1..-1]
 
 ## will currently take oldest timestamp instead of newest
